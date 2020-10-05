@@ -1,0 +1,9 @@
+# Dependencies
+/node_modules
+# Bundled files
+/dist
+
+# Misc
+npm-debug.log
+.DS_Store
+.vscode
