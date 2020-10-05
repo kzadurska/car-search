@@ -5,6 +5,9 @@ export const MODELS_FETCHED = 'MODELS_FETCHED';
 export const VEHICLES_FETCHED = 'VEHICLES_FETCHED';
 export const MAKE_SELECTED = 'MAKE_SELECTED';
 export const MODEL_SELECTED = 'MODEL_SELECTED';
+export const MAKES_FAILED = 'MAKES_FAILED';
+export const MODELS_FAILED = 'MODELS_FAILED';
+export const VEHICLES_FAILED = 'VEHICLES_FAILED';
 
 function makesFetched(makesList) {
   return {
@@ -17,6 +20,12 @@ function makeSelected(selected) {
   return {
     type: MAKE_SELECTED,
     selected,
+  };
+}
+
+function makesFailed() {
+  return {
+    type: MAKES_FAILED,
   };
 }
 
@@ -34,6 +43,12 @@ function modelSelected(selected) {
   };
 }
 
+function modelsFailed() {
+  return {
+    type: MODELS_FAILED,
+  };
+}
+
 function vehiclesFetched(vehiclesList) {
   return {
     type: VEHICLES_FETCHED,
@@ -41,9 +56,17 @@ function vehiclesFetched(vehiclesList) {
   };
 }
 
+function vehiclesFailed() {
+  return {
+    type: VEHICLES_FAILED,
+  };
+}
+
 export function getMakes() {
   return dispatch => {
-    return getMakesApi().then(response => dispatch(makesFetched(response)));
+    return getMakesApi()
+      .then(response => dispatch(makesFetched(response)))
+      .catch(() => dispatch(makesFailed()));
   };
 }
 
@@ -56,7 +79,9 @@ export function selectMake(make) {
 
 export function getModels(model) {
   return dispatch => {
-    return getModelsApi(model).then(response => dispatch(modelsFetched(response)));
+    return getModelsApi(model)
+      .then(response => dispatch(modelsFetched(response)))
+      .catch(() => dispatch(modelsFailed()));
   };
 }
 
@@ -69,6 +94,8 @@ export function selectModel(model) {
 
 export function getVehicles(model) {
   return (dispatch, getState) => {
-    return getVehiclesApi(getState().makes.selected, model).then(response => dispatch(vehiclesFetched(response)));
+    return getVehiclesApi(getState().makes.selected, model)
+      .then(response => dispatch(vehiclesFetched(response)))
+      .catch(() => dispatch(vehiclesFailed()));
   };
 }

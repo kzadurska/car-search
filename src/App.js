@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import { GlobalStyles } from 'styles';
 import { getMakes, selectMake, selectModel } from 'actions';
+import Makes from 'components/Makes';
+import Models from 'components/Models';
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -21,14 +23,6 @@ function mapStateToProps({ makes, models, vehicles }) {
 }
 
 function App({ dispatch, makes, selectedMake, models, selectedModel, vehicles }) {
-  useEffect(() => {
-    dispatch(getMakes());
-  }, []);
-
-  function handleMakeSelect(event) {
-    dispatch(selectMake(event.target.value));
-  }
-
   function handleModelSelect(event) {
     dispatch(selectModel(event.target.value));
   }
@@ -42,25 +36,9 @@ function App({ dispatch, makes, selectedMake, models, selectedModel, vehicles })
           <h1>Car search</h1>
         </header>
         <p>Click to choose your car</p>
-        <select onChange={handleMakeSelect}>
-          <option value="">--Please choose an option--</option>
-          {makes.map(make => (
-            <option key={make} value={make}>
-              {make}
-            </option>
-          ))}
-        </select>
-        {models.length > 0 && (
-          <select onChange={handleModelSelect} css="margin-top: 24px;">
-            <option value="">--Please choose an option--</option>
-            {models.map(model => (
-              <option key={model} value={model}>
-                {model}
-              </option>
-            ))}
-          </select>
-        )}
-        {selectedMake && models.length === 0 && <div css="margin-top: 24px;">No models to display</div>}
+        <Makes />
+        <Models />
+
         {selectedMake && selectedModel && vehicles.length > 0 && (
           <div css="display: flex; width: 100%; flex-wrap: wrap; justify-content: space-between;">
             {vehicles.map(
