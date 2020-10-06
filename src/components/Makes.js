@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getMakes, selectMake } from 'actions';
+import { getMakes, makeSelected, getModels } from 'actions';
 import Error from 'components/Error';
 
 Makes.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  makes: PropTypes.array.isRequired,
+  makes: PropTypes.arrayOf(PropTypes.string).isRequired,
   error: PropTypes.bool.isRequired,
 };
 
@@ -24,11 +24,10 @@ function Makes({ dispatch, makes, error }) {
   }, []);
 
   function handleMakeSelect(event) {
-    dispatch(selectMake(event.target.value));
-  }
+    const { value } = event.target;
 
-  function fetchMakes() {
-    dispatch(getMakes());
+    dispatch(makeSelected(value));
+    dispatch(getModels(value));
   }
 
   return (
@@ -44,7 +43,7 @@ function Makes({ dispatch, makes, error }) {
         </select>
       )}
       {error && (
-        <Error onClick={fetchMakes}>
+        <Error onClick={() => dispatch(getMakes())}>
           <div>Failed to fetch makes.</div>
         </Error>
       )}

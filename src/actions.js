@@ -16,7 +16,7 @@ function makesFetched(makesList) {
   };
 }
 
-function makeSelected(selected) {
+export function makeSelected(selected) {
   return {
     type: MAKE_SELECTED,
     selected,
@@ -36,7 +36,7 @@ function modelsFetched(modelsList) {
   };
 }
 
-function modelSelected(selected) {
+export function modelSelected(selected) {
   return {
     type: MODEL_SELECTED,
     selected,
@@ -70,25 +70,11 @@ export function getMakes() {
   };
 }
 
-export function selectMake(make) {
-  return dispatch => {
-    dispatch(makeSelected(make));
-    make && dispatch(getModels(make));
-  };
-}
-
 export function getModels(model) {
   return dispatch => {
     return getModelsApi(model)
       .then(response => dispatch(modelsFetched(response)))
       .catch(() => dispatch(modelsFailed()));
-  };
-}
-
-export function selectModel(model) {
-  return dispatch => {
-    dispatch(modelSelected(model));
-    model && dispatch(getVehicles(model));
   };
 }
 
