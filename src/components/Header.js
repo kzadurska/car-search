@@ -23,8 +23,8 @@ Header.propTypes = {
 function mapStateToProps({ models, makes }) {
   return {
     isResetButtonDisplayed: Boolean(makes.selected),
-    isMakesDropdownDisabled: makes.error,
-    isModelsDropdownDisabled: makes.error || models.error || models.list.length === 0,
+    isMakesDropdownDisabled: makes.error || makes.loading,
+    isModelsDropdownDisabled: makes.error || models.error || models.loading || models.list.length === 0,
     selectedMake: makes.selected,
     selectedModel: models.selected,
     makes: makes.list,

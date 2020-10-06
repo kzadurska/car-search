@@ -23,8 +23,8 @@ const ErrorWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ffaeab;
-  border: 1px solid tomato;
+  border: 1px solid crimson;
+  color: crimson;
   border-radius: 4px;
   padding: 8px;
   width: 100%;

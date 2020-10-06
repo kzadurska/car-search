@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 import { getVehicles } from 'actions';
 import Error from 'components/Error';
-import { v4 as uuidv4 } from 'uuid';
+import Loader from 'components/Loader';
 
 Vehicles.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -20,6 +21,7 @@ Vehicles.propTypes = {
     })
   ).isRequired,
   error: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   selectedModel: PropTypes.string.isRequired,
   isVehiclesListDisplayed: PropTypes.bool.isRequired,
   isEmptyPlaceholderDisplayed: PropTypes.bool.isRequired,
@@ -30,20 +32,34 @@ function mapStateToProps({ makes, models, vehicles }) {
     selectedModel: models.selected,
     vehicles: vehicles.list,
     error: vehicles.error,
-    isVehiclesListDisplayed:
-      !vehicles.error && Boolean(makes.selected) && Boolean(models.selected) && vehicles.list.length > 0,
+    loading: vehicles.loading,
+    isVehiclesListDisplayed: !vehicles.error && !vehicles.loading && vehicles.list.length > 0,
     isEmptyPlaceholderDisplayed:
-      !vehicles.error && Boolean(makes.selected) && Boolean(models.selected) && vehicles.list.length === 0,
+      !vehicles.error &&
+      !vehicles.loading &&
+      Boolean(makes.selected) &&
+      Boolean(models.selected) &&
+      vehicles.list.length === 0,
   };
 }
 
-function Vehicles({ dispatch, error, selectedModel, vehicles, isVehiclesListDisplayed, isEmptyPlaceholderDisplayed }) {
+function Vehicles({
+  dispatch,
+  error,
+  loading,
+  selectedModel,
+  vehicles,
+  isVehiclesListDisplayed,
+  isEmptyPlaceholderDisplayed,
+}) {
   function handleRetryClick() {
     dispatch(getVehicles(selectedModel));
   }
 
   return (
     <>
+      {loading && <Loader />}
+
       {isVehiclesListDisplayed && (
         <div css="display: flex; width: 100%; flex-wrap: wrap; justify-content: space-between;">
           {vehicles.map(({ make, model, enginePowerPS, enginePowerKW, engineCapacity, bodyType, fuelType }) => (
