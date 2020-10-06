@@ -10,6 +10,8 @@ Models.propTypes = {
   models: PropTypes.arrayOf(PropTypes.string).isRequired,
   error: PropTypes.bool.isRequired,
   selectedMake: PropTypes.string.isRequired,
+  isDropdownDisplayed: PropTypes.bool.isRequired,
+  isEmptyPlaceholderDisplayed: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps({ models, makes }) {
@@ -17,10 +19,12 @@ function mapStateToProps({ models, makes }) {
     models: models.list,
     error: models.error,
     selectedMake: makes.selected,
+    isDropdownDisplayed: !models.error && models.length > 0,
+    isEmptyPlaceholderDisplayed: !models.error && makes.selected && models.list.length === 0,
   };
 }
 
-function Models({ dispatch, selectedMake, models, error }) {
+function Models({ dispatch, selectedMake, models, error, isDropdownDisplayed, isEmptyPlaceholderDisplayed }) {
   function handleModelSelect(event) {
     const { value } = event.target;
 
@@ -34,7 +38,7 @@ function Models({ dispatch, selectedMake, models, error }) {
 
   return (
     <>
-      {!error && models.length > 0 && (
+      {isDropdownDisplayed && (
         <select onChange={handleModelSelect} css="margin-top: 24px;">
           <option value="">--Please choose an option--</option>
           {models.map(model => (
@@ -44,7 +48,7 @@ function Models({ dispatch, selectedMake, models, error }) {
           ))}
         </select>
       )}
-      {!error && selectedMake && models.length === 0 && <div css="margin-top: 24px;">No models to display</div>}
+      {isEmptyPlaceholderDisplayed && <div css="margin-top: 24px;">No models to display</div>}
 
       {error && (
         <Error onClick={handleRetryClick}>

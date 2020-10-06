@@ -42,6 +42,7 @@ function Makes({ dispatch, makes, error }) {
           ))}
         </select>
       )}
+
       {error && (
         <Error onClick={() => dispatch(getMakes())}>
           <div>Failed to fetch makes.</div>

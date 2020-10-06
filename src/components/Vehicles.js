@@ -21,6 +21,8 @@ Vehicles.propTypes = {
   error: PropTypes.bool.isRequired,
   selectedMake: PropTypes.string.isRequired,
   selectedModel: PropTypes.string.isRequired,
+  isDropdownDisplayed: PropTypes.bool.isRequired,
+  isEmptyPlaceholderDisplayed: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps({ makes, models, vehicles }) {
@@ -29,17 +31,26 @@ function mapStateToProps({ makes, models, vehicles }) {
     selectedModel: models.selected,
     vehicles: vehicles.list,
     error: vehicles.error,
+    isDropdownDisplayed: !vehicles.error && makes.selected && models.selected && vehicles.list.length > 0,
   };
 }
 
-function Vehicles({ dispatch, error, selectedModel, selectedMake, vehicles }) {
+function Vehicles({
+  dispatch,
+  error,
+  selectedModel,
+  selectedMake,
+  vehicles,
+  isDropdownDisplayed,
+  isEmptyPlaceholderDisplayed,
+}) {
   function handleRetryClick() {
     dispatch(getVehicles(selectedModel));
   }
 
   return (
     <>
-      {!error && selectedMake && selectedModel && vehicles.length > 0 && (
+      {isDropdownDisplayed && (
         <div css="display: flex; width: 100%; flex-wrap: wrap; justify-content: space-between;">
           {vehicles.map(({ make, model, enginePowerPS, enginePowerKW, engineCapacity, bodyType, fuelType }) => (
             <div
@@ -59,9 +70,7 @@ function Vehicles({ dispatch, error, selectedModel, selectedMake, vehicles }) {
           ))}
         </div>
       )}
-      {!error && selectedMake && selectedModel && vehicles.length === 0 && (
-        <div css="margin-top: 24px;">No vehicles to display</div>
-      )}
+      {isEmptyPlaceholderDisplayed && <div css="margin-top: 24px;">No vehicles to display</div>}
 
       {error && (
         <Error onClick={handleRetryClick}>
