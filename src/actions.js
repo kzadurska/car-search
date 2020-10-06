@@ -8,6 +8,7 @@ export const MODEL_SELECTED = 'MODEL_SELECTED';
 export const MAKES_FAILED = 'MAKES_FAILED';
 export const MODELS_FAILED = 'MODELS_FAILED';
 export const VEHICLES_FAILED = 'VEHICLES_FAILED';
+export const SEARCH_RESET = 'SEARCH_RESET';
 
 function makesFetched(makesList) {
   return {
@@ -59,6 +60,12 @@ function vehiclesFetched(vehiclesList) {
 function vehiclesFailed() {
   return {
     type: VEHICLES_FAILED,
+  };
+}
+
+export function resetSearch() {
+  return {
+    type: SEARCH_RESET,
   };
 }
 

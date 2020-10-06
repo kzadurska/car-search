@@ -10,6 +10,7 @@ Models.propTypes = {
   models: PropTypes.arrayOf(PropTypes.string).isRequired,
   error: PropTypes.bool.isRequired,
   selectedMake: PropTypes.string.isRequired,
+  selectedModel: PropTypes.string.isRequired,
   isDropdownDisplayed: PropTypes.bool.isRequired,
   isEmptyPlaceholderDisplayed: PropTypes.bool.isRequired,
 };
@@ -19,12 +20,21 @@ function mapStateToProps({ models, makes }) {
     models: models.list,
     error: models.error,
     selectedMake: makes.selected,
+    selectedModel: models.selected,
     isDropdownDisplayed: !models.error && models.length > 0,
-    isEmptyPlaceholderDisplayed: !models.error && makes.selected && models.list.length === 0,
+    isEmptyPlaceholderDisplayed: !models.error && Boolean(makes.selected) && models.list.length === 0,
   };
 }
 
-function Models({ dispatch, selectedMake, models, error, isDropdownDisplayed, isEmptyPlaceholderDisplayed }) {
+function Models({
+  dispatch,
+  selectedMake,
+  models,
+  selectedModel,
+  error,
+  isDropdownDisplayed,
+  isEmptyPlaceholderDisplayed,
+}) {
   function handleModelSelect(event) {
     const { value } = event.target;
 
@@ -39,7 +49,7 @@ function Models({ dispatch, selectedMake, models, error, isDropdownDisplayed, is
   return (
     <>
       {isDropdownDisplayed && (
-        <select onChange={handleModelSelect} css="margin-top: 24px;">
+        <select onChange={handleModelSelect} value={selectedModel} css="margin-top: 24px;">
           <option value="">--Please choose an option--</option>
           {models.map(model => (
             <option key={model} value={model}>
@@ -48,6 +58,7 @@ function Models({ dispatch, selectedMake, models, error, isDropdownDisplayed, is
           ))}
         </select>
       )}
+
       {isEmptyPlaceholderDisplayed && <div css="margin-top: 24px;">No models to display</div>}
 
       {error && (

@@ -1,11 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { GlobalStyles } from 'styles';
+import { resetSearch } from 'actions';
 import Makes from 'components/Makes';
 import Models from 'components/Models';
 import Vehicles from 'components/vehicles';
+import Button from 'components/Button';
 
-export default function App() {
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+function App({ dispatch }) {
+  function handleResetSearchClick() {
+    dispatch(resetSearch());
+  }
   return (
     <>
       <GlobalStyles />
@@ -14,11 +25,13 @@ export default function App() {
         <header>
           <h1>Car search</h1>
         </header>
-        <p>Click to choose your car</p>
         <Makes />
         <Models />
         <Vehicles />
+        <Button onClick={handleResetSearchClick}>Clear search</Button>
       </main>
     </>
   );
 }
+
+export default connect()(App);
