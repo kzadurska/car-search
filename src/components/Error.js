@@ -20,16 +20,16 @@ export default function Error({ children, onClick }) {
 }
 
 const ErrorWrapper = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-background: #ffaeab;
-border: 1px solid tomato;
-border-radius: 4px;
-padding: 8px;
-margin-top: 8px;
-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffaeab;
+  border: 1px solid tomato;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
 
-@media ${queries.desktop} {
+  @media ${queries.desktop} {
     width: 500px;
+  }
 `;

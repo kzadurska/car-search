@@ -13,13 +13,9 @@ export const GlobalStyles = createGlobalStyle`
   body {
     display: flex;
     flex-direction: column;
-    margin: 32px;
+    margin: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     font-family: sans-serif;
-
-    &.no-scroll {
-      overflow: hidden;
-    }
   }
 `;

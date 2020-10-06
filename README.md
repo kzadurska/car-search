@@ -4,19 +4,9 @@
  
 ### Requirements
 
-- Documentation of the project installation
-- Notes about the main problem the code solution is trying to solve.
-- JavaScript practices and standards will be evaluated.
-- The DRY principle to eliminate duplication in logic.
-- Clear structure of the project.
-- Adding unit tests if you have enough time.
-- State management and structure.
-- Mobile first and desktop-friendly UI.
+- Make a mobile first and desktop-friendly UI.
 - Build your own styles, don't use any CSS framework like Bootstrap.
-- The app should work on the latest version of all major browsers.
-- Build tools for project development and production setup (optional).
-- User interface design will not be so important for the evaluation.
-
+- The app should work on the latest version of all major browsers
 
 ### Considerations
 
@@ -28,10 +18,6 @@
 - Think of this app as a real project where you need to consider maintainability.
 - Only use 3rd party components if there is good reasoning for it. Please justify if not a basic library.
 - Don't be afraid to surprise us!
-
-### What I considered doing but did not in the end
-
-TDB
 
 ## Installation
 
@@ -45,14 +31,20 @@ npm ci
 
 `npm start`
 
-The app will be available at http://0.0.0.0:8080/
+The app will be available at http://0.0.0.0:8081/
 
 For production build type `npm run build`, the app will be built into the `/dist` directory.
 
-By default the app will use `http://localhost:8080/` as the API URL. To pass a specific URL use `API_URL` parameter when launching and building the app:
+By default the app will use `http://localhost:8080` as the API URL. To pass a specific URL use `API_URL` parameter when launching and building the app:
 
-`API_URL=your.url.here npm start`
-`API_URL=your.url.here npm run build`
+`API_URL=https://your.url.here npm start`
+`API_URL=https://your.url.here npm run build`
+
+### Backend API
+
+Downloaded from [Gitlab](https://gitlab.forfriday.de/-/snippets/56#frontend-developer-candidate-assignment)
+
+Run server by `node apiserver/server.js`
 
 ## Contributing
 
