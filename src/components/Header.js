@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { queries } from 'styles';
-import { modelSelected, makeSelected, getVehicles, getModels, resetSearch } from 'actions';
+
+import { modelSelected, getModels } from 'actions/models';
+import { makeSelected } from 'actions/makes';
+import { getVehicles } from 'actions/vehicles';
+import { resetSearch } from 'actions/reset';
 
 import Button from 'components/Button';
 import Select from 'components/Select';

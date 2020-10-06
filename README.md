@@ -19,6 +19,12 @@
 - Only use 3rd party components if there is good reasoning for it. Please justify if not a basic library.
 - Don't be afraid to surprise us!
 
+### My comments for consideration
+-  *Think of a user-friendly way to find and select a vehicle.* Decided to use native buttons and dropdowns so that mobile users get this native experience they are used to.
+- *The API calls will not always return a successful result* Added error handling.
+- *The provided API has only a fraction of the vehicles that we would have in a production server* Added loading states and loader to indicate it to the user - especially needed with a heavy payload.
+- *Only use 3rd party components if there is good reasoning for it. Please justify if not a basic library* Except for the basic setup I used `styled-components` because I am used to styling apps this way. I added `uuid` to have a unique id for vehicles. Normally there would probably be a unique identifier from backend and adding array index to key is considered an anti-pattern. 
+
 ## Installation
 
 ```bash

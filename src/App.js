@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { GlobalStyles } from 'styles';
 
-import { getMakes } from 'actions';
+import { getMakes } from 'actions/makes';
 
 import Header from 'components/Header';
 import Makes from 'components/Makes';

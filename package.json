@@ -19,7 +19,6 @@
   "author": "Kasia Zadurska",
   "homepage": "https://github.com/kzadurska/car-search#readme",
   "dependencies": {
-    "gh-pages": "3.1.0",
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -28,7 +27,7 @@
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
     "styled-components": "5.1.1",
-    "uuid": "^8.3.1"
+    "uuid": "8.3.1"
   },
   "devDependencies": {
     "@babel/cli": "7.10.5",

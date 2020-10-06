@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
-import { getVehicles } from 'actions';
+import { getVehicles } from 'actions/vehicles';
 import Error from 'components/Error';
 import Loader from 'components/Loader';
 

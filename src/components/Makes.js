@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getMakes } from 'actions';
+import { getMakes } from 'actions/makes';
 import Error from 'components/Error';
 import Loader from 'components/Loader';
 
